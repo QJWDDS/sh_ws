@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <actor name="actball">
+    <pose>40 0 5 0 0 0</pose>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <sphere><radius>0.5</radius></sphere>
+        </geometry>
+        <material>
+          <ambient>1.0 0.0 0.0 1.0</ambient>
+          <diffuse>1.0 0.0 0.0 1.0</diffuse>
+          <specular>0.5 0.5 0.5 1.0</specular>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <sphere><radius>0.5</radius></sphere>
+        </geometry>
+      </collision>
+    </link>
+    <script>
+      <loop>true</loop>
+      <delay_start>0.0</delay_start>
+      <auto_start>true</auto_start>
+      <trajectory id="0" type="circular" tension="0.8">
+        <!--航点-->
+        <waypoint>
+          <time>0.0</time>
+          <pose>0 0 0 0 0 0</pose>  <!-- 相对偏移量 -->
+        </waypoint>
+        <waypoint>
+          <time>1.0</time>
+          <pose>0.268 -1.0 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>2.0</time>
+          <pose>1.0 -1.732 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>3.0</time>
+          <pose>2.0 -2.0 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>4.0</time>
+          <pose>3.0 -1.732 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>5.0</time>
+          <pose>3.732 -1.0 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>6.0</time>
+          <pose>4.0 0 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>7.0</time>
+          <pose>3.732 1.0 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>8.0</time>
+          <pose>3.0 1.732 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>9.0</time>
+          <pose>2.0 2.0 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>10.0</time>
+          <pose>1.0 1.732 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>11.0</time>
+          <pose>0.268 1.0 0 0 0 0</pose>
+        </waypoint>
+        <waypoint>
+          <time>12.0</time>
+          <pose>0 0 0 0 0 0</pose>
+        </waypoint>
+      </trajectory>
+    </script>
+  </actor>
+</sdf>
