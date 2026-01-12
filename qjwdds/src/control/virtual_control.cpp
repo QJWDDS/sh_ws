@@ -340,7 +340,7 @@ private:
             has_arm_position_ = true;
             {
                 std::lock_guard<std::mutex> lock(attitude_mutex_);
-                if (has_attitude_data_) takeoff_yaw_ = current_yaw_;
+                if (has_attitude_data_) takeoff_yaw_ = current_yaw_; //current_yaw_;
             }
         }
         publish_vehicle_command(VehicleCommand::VEHICLE_CMD_COMPONENT_ARM_DISARM, 1.0);

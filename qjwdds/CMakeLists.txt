@@ -67,6 +67,16 @@ target_link_libraries(virtual_control
 install(TARGETS virtual_control                             
   DESTINATION lib/${PROJECT_NAME}
 )
+#======================================
+add_executable(vision_control_PsiRate src/control/vision_control_PsiRate.cpp)  
+ament_target_dependencies(vision_control_PsiRate rclcpp px4_msgs)  
+target_link_libraries(vision_control_PsiRate                        
+  ${PROJECT_NAME}__rosidl_typesupport_cpp
+)
+install(TARGETS vision_control_PsiRate                             
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

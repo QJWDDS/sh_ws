@@ -23,13 +23,13 @@ def generate_launch_description():
 
     gazebo_node = Node(
         package='qjwddspy',
-        executable='gazebo_imageball_dec_pub',
+        executable='gazebo_redball_dec_pub',
         name='gazebo_pub',
         output='screen',
         parameters=[{
             'hsv_lower': [0, 80, 100],  
-            'hsv_upper': [255, 255, 255],
-            'circularity_threshold': 0.7,
+            'hsv_upper': [10, 255, 255],
+            'circularity_threshold': 0.6,
             'video_output': False,
             'min_object_area':100,
             'image_topic':'/world/baylands/model/x500_mono_cam_0/link/camera_link/sensor/camera/image'

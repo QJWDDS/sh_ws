@@ -5,12 +5,12 @@ TOPIC_X="/model/sptballoon/joint/x_axis_joint/0/cmd_pos"
 TOPIC_Y="/model/sptballoon/joint/y_axis_joint/0/cmd_pos"
 TOPIC_Z="/model/sptballoon/joint/z_axis_joint/0/cmd_pos"
 
-BASE_SIZE=80      # 底边长
+BASE_SIZE=54      # 底边长
 HEIGHT=40         # 总高度
 STEP_SIZE=4       # 每次运动距离 4米
 SLEEP_TIME=1.0    # 每次运动等待 1秒
 
-# --- 辅助函数：发布指令 ---
+# --- 函数：发布指令 ---
 # 参数 $1: 话题, $2: 数值
 publish_cmd() {
     gz topic -t "$1" -m gz.msgs.Double -p "data: $2"
@@ -45,9 +45,7 @@ for (( h=0; h<=HEIGHT; h+=STEP_SIZE )); do
         break
     fi
 
-    # 2. 生成当前层的螺旋路径点 (仅 Y 和 Z 轴)
-    # 我们先生成从中心向外的完整路径数组，如果是向内模式，则倒序执行
-    
+    # 生成当前层的螺旋路径点 (仅 Y 和 Z 轴)
     # 临时数组清空
     path_y=()
     path_z=()
@@ -60,7 +58,6 @@ for (( h=0; h<=HEIGHT; h+=STEP_SIZE )); do
 
     # 螺旋生成算法 (Center -> Out)
     # 逻辑：右移k, 上移k, 左移k+step, 下移k+step...
-    # 这里为了精确控制每4米一个指令，我们需要拆分长段移动
     len=4
     # 方向标志: 1=Right/Up, -1=Left/Down
     sign=1 
@@ -95,7 +92,7 @@ for (( h=0; h<=HEIGHT; h+=STEP_SIZE )); do
         len=$((len + STEP_SIZE)) # 边长增加
     done
 
-    # 3. 根据模式执行路径
+    # 根据模式执行路径
     path_len=${#path_y[@]}
     
     if [ "$direction_mode" -eq 0 ]; then
@@ -126,11 +123,11 @@ for (( h=0; h<=HEIGHT; h+=STEP_SIZE )); do
         done
     fi
 
-    # 4. 切换高度 (X轴)
+    # 切换高度 (X轴)
     # 只有当还没有到达顶点时才移动高度
     if [ "$h" -lt "$HEIGHT" ]; then
         next_h=$((h + STEP_SIZE))
-        # 题目要求 -x_axis_joint 为高的方向，即向上运动为负值增加（或者正值减小，视具体定义）
+        #  -x_axis_joint 为高的方向，即向上运动为负值增加
         # 这里假设 0 是底面，-40 是顶点。
         # data = -next_h
         cmd_x=$(echo "-1 * $next_h" | bc)
@@ -140,7 +137,7 @@ for (( h=0; h<=HEIGHT; h+=STEP_SIZE )); do
         sleep "$SLEEP_TIME"
     fi
 
-    # 5. 切换下一层的螺旋模式
+    # 切换下一层的螺旋模式
     if [ "$direction_mode" -eq 0 ]; then
         direction_mode=1 # 下一次向内
     else

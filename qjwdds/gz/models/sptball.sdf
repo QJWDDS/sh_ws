@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
   <model name="sptballoon"> 
-    <pose>40 0 43 0 0 0</pose>
+    <pose>20 0 40 0 0 0</pose>
     <static>false</static>
 
     <link name="x_link">
@@ -69,7 +69,7 @@
         <limit>
           <lower>-100</lower>
           <upper>100</upper>
-          <velocity>4.0</velocity>
+          <velocity>3.0</velocity>
         </limit>
         <dynamics>
           <damping>0.5</damping>  <!-- 阻尼 -->
@@ -86,7 +86,7 @@
         <limit>
           <lower>-100</lower>
           <upper>100</upper>
-          <velocity>4.0</velocity>
+          <velocity>3.0</velocity>
         </limit>
         <dynamics>
           <damping>0.5</damping>  <!-- 阻尼 -->
@@ -103,7 +103,7 @@
         <limit>
           <lower>-100</lower>
           <upper>100</upper>
-          <velocity>4.0</velocity>
+          <velocity>3.0</velocity>
         </limit>
         <dynamics>
           <damping>1.5</damping>

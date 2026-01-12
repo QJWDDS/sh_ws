@@ -1,3 +1,4 @@
+// 角速度控制
 #include <px4_msgs/msg/offboard_control_mode.hpp>
 #include <px4_msgs/msg/trajectory_setpoint.hpp>
 #include <px4_msgs/msg/vehicle_command.hpp>
@@ -59,7 +60,7 @@ public:
         declare_parameter("takeoff_timeout", 30.0);             // 起飞超时时间(秒)
         declare_parameter("proportional_gain", 4.0);            // 水平比例增益
         declare_parameter("vertical_gain", 10.0);                // 垂直
-        declare_parameter("yaw_gain", 1.0);                     // 偏航
+        declare_parameter("yaw_gain", 2.0);                     // 偏航
         declare_parameter("max_speed", 5.0);                    // 最大水平速度(m/s)
         declare_parameter("max_vertical_speed", 5.0);           // 最大垂直速度(m/s)
         declare_parameter("max_yaw_rate", 0.5);                 // 最大偏航角速度(rad/s)
