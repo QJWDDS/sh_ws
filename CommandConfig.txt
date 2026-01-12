@@ -1,0 +1,65 @@
+##############git配置
+git config --global user.name "sh"
+git config --global user.email "qjwdds@163.com"
+git config --global init.defaultBranch master
+git config -l
+#初始化
+git init 
+#删库
+rm -rf .git
+#添加
+git add .gitignore
+git commit -m "添加git忽略文件"
+git add src/qjwdds
+git add .
+git commit -m "注释"
+git log
+#从暂存区踢出
+git reset
+
+
+#########网络ip释放获取
+sudo dhclient -r
+sudo dhclient
+##################鲁班猫远程SSH桌面
+passwoed:temppwd
+airmud:cat@192.168.1.166
+wifi:@192.168.1.101
+
+################used
+colcon build --packages-select qjwdds
+ros2 run qjwddspy gazebo_imageball_dec_pub --ros-args -p video_output:=True
+
+colcon build --packages-select qjwdds --allow-overriding qjwdds
+
+#删除安装目录
+rm -rf build install log
+
+#查看相机列表
+v4l2-ctl --list-devices
+v4l2-ctl --list-formats-ext
+
+
+#############Gazebo仿真
+MicroXRCEAgent udp4 -p 8888
+./QGC
+PX4_GZ_WORLD=default make px4_sitl gz_x500
+
+PX4_GZ_WORLD=default make px4_sitl gz_x500_mono_cam
+PX4_GZ_WORLD=baylands make px4_sitl gz_x500_mono_cam
+
+
+ros2 run ros_gz_bridge parameter_bridge /world/default/model/x500_mono_cam_0/link/camera_link/sensor/camera/image@sensor_msgs/msg/Image[gz.msgs.Image
+
+gz service --service /world/default/create --reqtype gz.msgs.EntityFactory --reptype gz.msgs.Boolean --timeout 1000 --req 'sdf_filename: "/home/shuai/sh_ws/src/qjwdds/gz/models/sptball.sdf"'
+gz service --service /world/baylands/create --reqtype gz.msgs.EntityFactory --reptype gz.msgs.Boolean --timeout 1000 --req 'sdf_filename: "/home/shuai/sh_ws/src/qjwdds/gz/models/sptball.sdf"'
+
+#运动
+gz topic -t /model/sptballoon/joint/y_axis_joint/0/cmd_pos -m gz.msgs.Double -p 'data: 5.0'
+chmod +x loop_trajectory.sh
+./loop_trajectory.sh
+
+
+
+source .venv/bin/activate
+deactivate
