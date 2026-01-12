@@ -1,0 +1,32 @@
+code .venv/lib/python3.10/site-packages/lerobot/policies/act/configuration_act.py
+
+rm -rf ~/.cache/huggingface/lerobot/local/drone_interception_v1
+
+HF_HUB_OFFLINE=1 lerobot-train \
+  --policy.type=act \
+  --dataset.repo_id=local/drone_interception_v1 \
+  --output_dir=LeRobot/outputs/drone_act_test0 \
+  --policy.dim_model=512 \
+  --policy.n_action_steps=50 \
+  --batch_size=4 \
+  --steps=100000 \
+  --eval_freq=1000 \
+  --save_freq=10000 \
+  --policy.push_to_hub=false \
+  --policy.use_amp=true \
+  --wandb.mode=offline
+
+
+HF_HUB_OFFLINE=1 lerobot-train \
+  --policy.type=act \
+  --dataset.repo_id=local/drone_interception_v7 \
+  --output_dir=LeRobot/outputs/drone_act_test \
+  --policy.dim_model=512 \
+  --policy.n_action_steps=50 \
+  --batch_size=4 \
+  --steps=100000 \
+  --eval_freq=1000 \
+  --save_freq=10000 \
+  --policy.push_to_hub=false \
+  --policy.use_amp=true \
+  --wandb.mode=offline
