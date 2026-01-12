@@ -1,0 +1,5 @@
+torch==2.9.1+cu126
+numpy==1.26.4
+matplotlib==3.8.4
+scipy==1.11.4
+gymnasium==0.29.1
